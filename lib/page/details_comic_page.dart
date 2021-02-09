@@ -67,7 +67,12 @@ class DetailsComicPage extends StatelessWidget {
                       fontSize: 20,
                     ),
                   ),
-                  CustomButton()
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Center(
+                    child: CustomButton(),
+                  )
                 ],
               ),
             )

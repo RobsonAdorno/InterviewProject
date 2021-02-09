@@ -7,6 +7,8 @@ import 'package:teste_flutter_crmall/core/widget/custom_font_style.dart';
 import 'package:teste_flutter_crmall/core/widget/custom_snackbar.dart';
 import 'package:teste_flutter_crmall/model/comic_sumarry.dart';
 import 'package:teste_flutter_crmall/page/details_comic_page.dart';
+import 'package:teste_flutter_crmall/page/shop_cart_page.dart';
+import 'package:teste_flutter_crmall/page/widget/custom_app_bar.dart';
 import 'package:teste_flutter_crmall/page/widget/image_handler.dart';
 import '../page/error_page/error_page.dart';
 
@@ -41,56 +43,64 @@ class HomeComicWidget extends StatelessWidget {
       children: <Widget>[
         Container(
           height: MediaQuery.of(context).size.height / 2 - 100,
-          child: SafeArea(
-            child: Stack(
-              children: <Widget>[
-                Positioned.fill(
-                  child: Image.asset(
-                    'assets/image/background1.png',
-                    fit: BoxFit.fill,
-                  ),
+          child: Stack(
+            children: <Widget>[
+              Positioned.fill(
+                child: Image.asset(
+                  'assets/image/background1.png',
+                  fit: BoxFit.fill,
                 ),
-                Positioned(
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 50),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Image.asset(
-                          'assets/image/logo.png',
-                          width: 100,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+              ),
+              Positioned(
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 50),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      SizedBox(
-                        height: 90,
+                      Image.asset(
+                        'assets/image/logo.png',
+                        width: 100,
                       ),
-                      CustomFontStyle(
-                        isTitle: true,
-                        text: 'Marvel Comics'.toUpperCase(),
+                      IconButton(
                         color: AppTheme.backgroundColor,
+                        icon: Icon(Icons.shopping_cart),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ShopCartPage()));
+                        },
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      CustomFontStyle(
-                        isTitle: false,
-                        text:
-                            'Abaixo temos uma listagem de HQs da Marvel, desfrute',
-                        color: AppTheme.backgroundColor,
-                      )
                     ],
                   ),
                 ),
-              ],
-            ),
+              ),
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 90,
+                    ),
+                    CustomFontStyle(
+                      isTitle: true,
+                      text: 'Marvel Comics'.toUpperCase(),
+                      color: AppTheme.backgroundColor,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    CustomFontStyle(
+                      isTitle: false,
+                      text:
+                          'Abaixo temos uma listagem de HQs da Marvel, desfrute',
+                      color: AppTheme.backgroundColor,
+                    )
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
         Expanded(
@@ -164,7 +174,7 @@ class ComicCard extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width / 2 - 40,
                   child: Hero(
-                      tag: listOfComics[index].title,
+                      tag: listOfComics[index].id,
                       child: ImageHandler(listOfComics[index].images)),
                 ),
               ),
